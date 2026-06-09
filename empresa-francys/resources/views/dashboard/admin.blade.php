@@ -57,7 +57,9 @@
             <h2>Gestión de Usuarios</h2>
             <div class="table-container">
                 <h3>Crear Nuevo Usuario</h3>
-                <form action="{{ route('register') }}" method="POST" style="margin: 15px 0;">
+                <form action="{{ route('admin.users.store') }}" method="POST"> 
+
+Route::post('/admin/users/store', [AdminController::class, 'storeUsuario'])->name('admin.users.store');
                     @csrf
                     <input type="text" name="name" placeholder="Nombre" required style="padding: 5px;">
                     <input type="email" name="email" placeholder="Correo" required style="padding: 5px;">
