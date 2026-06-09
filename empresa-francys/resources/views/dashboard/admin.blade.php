@@ -57,15 +57,24 @@
             <h2>Gestión de Usuarios</h2>
             <div class="table-container">
                 <h3>Crear Nuevo Usuario</h3>
-                <form action="{{ route('admin.users.store') }}" method="POST"> 
+              <form action="{{ route('admin.users.store') }}" method="POST">
+    @csrf
+    <input type="text" name="name" placeholder="Nombre" required style="padding: 5px;">
+    <input type="email" name="email" placeholder="Correo" required style="padding: 5px;">
+    <input type="password" name="password" placeholder="Contraseña" required style="padding: 5px;">
+    <button type="submit" class="btn-action" style="background: #22c55e;">Crear</button>
+</form>
 
-Route::post('/admin/users/store', [AdminController::class, 'storeUsuario'])->name('admin.users.store');
-                    @csrf
-                    <input type="text" name="name" placeholder="Nombre" required style="padding: 5px;">
-                    <input type="email" name="email" placeholder="Correo" required style="padding: 5px;">
-                    <input type="password" name="password" placeholder="Contraseña" required style="padding: 5px;">
-                    <button type="submit" class="btn-action" style="background: #22c55e;">Crear</button>
-                </form>
+<form action="{{ route('admin.productos.store') }}" method="POST" style="margin: 15px 0;">
+    @csrf
+    <input type="text" name="nombre" placeholder="Nombre" required style="padding: 5px;">
+    <input type="number" name="precio" placeholder="Precio" required style="padding: 5px;">
+    <input type="number" name="stock" placeholder="Stock" required style="padding: 5px;">
+    
+    <input type="text" name="categoria" placeholder="Categoría" required style="padding: 5px;">
+    
+    <button type="submit" class="btn-action" style="background: #22c55e;">Guardar</button>
+</form>
                 <table class="admin-table" id="tablaUsuarios">
                     <thead>
                         <tr>

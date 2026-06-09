@@ -24,11 +24,26 @@ class AdminController extends Controller
         return back()->with('success', 'Estado  cambiado.');
     }
 
-    public function storeProducto(Request $request) 
-    {
-        Producto::create($request->all());
-        return back()->with('success', 'Producto creado.');
-    }
+   public function storeProducto(Request $request) 
+{
+    // Validamos que la categoría al menos tenga un valor
+    $request->validate([
+        'nombre'    => 'required',
+        'precio'    => 'required|numeric',
+        'stock'     => 'required|numeric',
+        'categoria' => 'required', // Obligatorio
+    ]);
+
+    // Creamos el producto solo con los campos permitidos
+    Producto::create([
+        'nombre'    => $request->nombre,
+        'precio'    => $request->precio,
+        'stock'     => $request->stock,
+        'categoria' => $request->categoria,
+    ]);
+
+    return back()->with('success', 'Producto creado exitosamente.');
+}
 
     public function updateProducto(Request $request, $id) 
     {
@@ -59,6 +74,23 @@ public function register(Request $request)
     // ... tu lógica de creación de usuario ...
     
     // Al final, asegúrate de tener esto:
+    return back()->with('success', 'Usuario creado exitosamente.');
+}
+public function storeUsuario(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+    ]);
+
+    \App\Models\User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'activo' => true, // Asegúrate de tener esta columna
+    ]);
+
     return back()->with('success', 'Usuario creado exitosamente.');
 }
 }

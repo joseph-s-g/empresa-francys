@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
 
     // ---------------- ADMINISTRADOR ----------------
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/users/store', [AdminController::class, 'storeUsuario'])->name('admin.users.store');
     
     // CRUD Usuarios (NUEVAS RUTAS AÑADIDAS)
     Route::patch('/admin/users/{id}/toggle', [AdminController::class, 'toggleUsuario'])->name('admin.users.toggle');
